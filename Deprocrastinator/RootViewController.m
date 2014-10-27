@@ -50,9 +50,17 @@
     cell.editing = YES;
     cell.editingAccessoryType = UITableViewCellEditingStyleDelete;
 
+    [tableView setEditing: YES animated: YES]; 
+
     return cell;
 }
 
+
+- (void)setEditing:(BOOL)editing animated:(BOOL)animated {
+    [super setEditing:editing animated:animated];
+
+    [self.toDoListTableView setEditing:editing animated:animated];
+}
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
