@@ -47,7 +47,18 @@
         cell.accessoryType = UITableViewCellAccessoryNone;
     }
 
+
+
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+
+    [self.toDoList removeObjectAtIndex:indexPath.row];
+    [self.checkmarks removeObjectAtIndex:indexPath.row];
+
+    [self.toDoListTableView reloadData];
 }
 
 
@@ -68,7 +79,7 @@
     
     // if in Edit mode (edit button = DONE)
     
-    
+
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
@@ -81,6 +92,7 @@
     return YES;
 }
 
+
 #pragma mark - IBActions
 
 - (IBAction)onAddButtonPressed:(UIButton *)sender
@@ -90,8 +102,8 @@
     [self.toDoListTableView reloadData];
     [self.toDoTextField resignFirstResponder];
     self.toDoTextField.text = @"";
-    
 }
+
 
 - (IBAction)onEditButtonPressed:(UIButton *)sender
 {
@@ -107,6 +119,7 @@
         [sender setTitle:@"Edit" forState:UIControlStateNormal];
 
         [self.toDoListTableView setEditing: NO animated: YES];
+
     }
 
     [self.toDoListTableView reloadData];
