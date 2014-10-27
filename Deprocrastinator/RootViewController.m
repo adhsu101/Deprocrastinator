@@ -46,20 +46,14 @@
     {
         cell.accessoryType = UITableViewCellAccessoryNone;
     }
+    
+    cell.editing = YES;
+    cell.editingAccessoryType = UITableViewCellEditingStyleDelete;
 
     return cell;
 }
 
 
-- (IBAction)onAddButtonPressed:(id)sender
-{
-    [self.toDoList addObject:self.toDoTextField.text];
-    [self.checkmarks addObject:@NO];
-    [self.toDoListTableView reloadData];
-    [self.toDoTextField resignFirstResponder];
-    self.toDoTextField.text = @"";
-    
-}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -74,6 +68,39 @@
         [self.checkmarks replaceObjectAtIndex:indexPath.row withObject:@NO];
     }
 
+    [self.toDoListTableView reloadData];
+    
+    // if in Edit mode (edit button = DONE)
+    
+    
+
+}
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return YES;
+}
+
+- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return YES;
+}
+
+#pragma mark - IBActions
+
+- (IBAction)onAddButtonPressed:(UIButton *)sender
+{
+    [self.toDoList addObject:self.toDoTextField.text];
+    [self.checkmarks addObject:@NO];
+    [self.toDoListTableView reloadData];
+    [self.toDoTextField resignFirstResponder];
+    self.toDoTextField.text = @"";
+    
+}
+
+- (IBAction)onEditButtonPressed:(UIButton *)sender
+{
+    [sender setTitle:@"Done" forState:UIControlStateNormal];
     [self.toDoListTableView reloadData];
 
 }
