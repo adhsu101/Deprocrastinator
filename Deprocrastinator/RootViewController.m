@@ -46,20 +46,8 @@
     {
         cell.accessoryType = UITableViewCellAccessoryNone;
     }
-    
-    cell.editing = YES;
-    cell.editingAccessoryType = UITableViewCellEditingStyleDelete;
-
-    [tableView setEditing: YES animated: YES]; 
 
     return cell;
-}
-
-
-- (void)setEditing:(BOOL)editing animated:(BOOL)animated {
-    [super setEditing:editing animated:animated];
-
-    [self.toDoListTableView setEditing:editing animated:animated];
 }
 
 
@@ -81,7 +69,6 @@
     // if in Edit mode (edit button = DONE)
     
     
-
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
@@ -108,7 +95,20 @@
 
 - (IBAction)onEditButtonPressed:(UIButton *)sender
 {
-    [sender setTitle:@"Done" forState:UIControlStateNormal];
+
+    if ([sender.titleLabel.text isEqualToString:@"Edit"])
+    {
+        [sender setTitle:@"Done" forState:UIControlStateNormal];
+
+        [self.toDoListTableView setEditing: YES animated: YES];
+    }
+    else
+    {
+        [sender setTitle:@"Edit" forState:UIControlStateNormal];
+
+        [self.toDoListTableView setEditing: NO animated: YES];
+    }
+
     [self.toDoListTableView reloadData];
 
 }
