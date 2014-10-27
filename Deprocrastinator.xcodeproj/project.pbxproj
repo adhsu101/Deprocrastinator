@@ -63,6 +63,7 @@
 		8D1027A819FEEACB0085D808 = {
 			isa = PBXGroup;
 			children = (
+				8D1027BE19FEEACB0085D808 /* Main.storyboard */,
 				8D1027B319FEEACB0085D808 /* Deprocrastinator */,
 				8D1027CD19FEEACC0085D808 /* DeprocrastinatorTests */,
 				8D1027B219FEEACB0085D808 /* Products */,
@@ -85,7 +86,6 @@
 				8D1027B919FEEACB0085D808 /* AppDelegate.m */,
 				8D1027BB19FEEACB0085D808 /* RootViewController.h */,
 				8D1027BC19FEEACB0085D808 /* RootViewController.m */,
-				8D1027BE19FEEACB0085D808 /* Main.storyboard */,
 				8D1027C119FEEACB0085D808 /* Images.xcassets */,
 				8D1027C319FEEACB0085D808 /* LaunchScreen.xib */,
 				8D1027B419FEEACB0085D808 /* Supporting Files */,
@@ -250,6 +250,7 @@
 				8D1027BF19FEEACB0085D808 /* Base */,
 			);
 			name = Main.storyboard;
+			path = Deprocrastinator;
 			sourceTree = "<group>";
 		};
 		8D1027C319FEEACB0085D808 /* LaunchScreen.xib */ = {
