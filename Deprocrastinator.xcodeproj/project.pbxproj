@@ -14,6 +14,7 @@
 		8D1027C219FEEACB0085D808 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8D1027C119FEEACB0085D808 /* Images.xcassets */; };
 		8D1027C519FEEACB0085D808 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D1027C319FEEACB0085D808 /* LaunchScreen.xib */; };
 		8D1027D119FEEACC0085D808 /* DeprocrastinatorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D1027D019FEEACC0085D808 /* DeprocrastinatorTests.m */; };
+		9026E60519FF2A670017C464 /* ToDoItemClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 9026E60419FF2A670017C464 /* ToDoItemClass.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +41,8 @@
 		8D1027CA19FEEACB0085D808 /* DeprocrastinatorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DeprocrastinatorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D1027CF19FEEACC0085D808 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D1027D019FEEACC0085D808 /* DeprocrastinatorTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeprocrastinatorTests.m; sourceTree = "<group>"; };
+		9026E60319FF2A670017C464 /* ToDoItemClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToDoItemClass.h; sourceTree = "<group>"; };
+		9026E60419FF2A670017C464 /* ToDoItemClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToDoItemClass.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +89,8 @@
 				8D1027B919FEEACB0085D808 /* AppDelegate.m */,
 				8D1027BB19FEEACB0085D808 /* RootViewController.h */,
 				8D1027BC19FEEACB0085D808 /* RootViewController.m */,
+				9026E60319FF2A670017C464 /* ToDoItemClass.h */,
+				9026E60419FF2A670017C464 /* ToDoItemClass.m */,
 				8D1027C119FEEACB0085D808 /* Images.xcassets */,
 				8D1027C319FEEACB0085D808 /* LaunchScreen.xib */,
 				8D1027B419FEEACB0085D808 /* Supporting Files */,
@@ -221,6 +226,7 @@
 			files = (
 				8D1027BD19FEEACB0085D808 /* RootViewController.m in Sources */,
 				8D1027BA19FEEACB0085D808 /* AppDelegate.m in Sources */,
+				9026E60519FF2A670017C464 /* ToDoItemClass.m in Sources */,
 				8D1027B719FEEACB0085D808 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
