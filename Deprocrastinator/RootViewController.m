@@ -98,7 +98,9 @@
 
         toDoItem.text = self.toDoTextField.text;
         toDoItem.isChecked = NO;
-        toDoItem.textColor = [UIColor blackColor];
+        toDoItem.textColor = @[[UIColor blackColor], [UIColor greenColor], [UIColor yellowColor], [UIColor redColor], nil];
+        
+        [self.toDoItemArray addObject:toDoItem];
 
         [self.toDoListTableView reloadData];
         [self.toDoTextField resignFirstResponder];
