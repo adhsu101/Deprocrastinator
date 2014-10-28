@@ -149,6 +149,11 @@
 
 - (IBAction)onSwipeToPriority:(UISwipeGestureRecognizer *)gesture
 {
+
+    if (!self.toDoItemArray.count == 0)
+        
+    {
+
     CGPoint touchPoint = [gesture locationInView:self.toDoListTableView];
     
     NSIndexPath *swipedRowIndex = [self.toDoListTableView indexPathForRowAtPoint:touchPoint];
@@ -182,6 +187,7 @@
             swipedCell.backgroundColor = [UIColor whiteColor];
             swipedToDo.color =[UIColor whiteColor];
         }
+    }
 }
 
 @end
