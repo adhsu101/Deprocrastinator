@@ -98,7 +98,7 @@
 
         toDoItem.text = self.toDoTextField.text;
         toDoItem.isChecked = NO;
-        toDoItem.textColor = @[[UIColor blackColor], [UIColor greenColor], [UIColor yellowColor], [UIColor redColor], nil];
+        toDoItem.textColorArray = @[[UIColor blackColor], [UIColor greenColor], [UIColor yellowColor], [UIColor redColor]];
         
         [self.toDoItemArray addObject:toDoItem];
 
@@ -137,30 +137,21 @@
     
     
     NSIndexPath *swipedRowIndex = [self.toDoListTableView indexPathForRowAtPoint:touchPoint];
-    NSLog(@"%li", (long)swipedRowIndex.row);
     
     UITableViewCell *swipedCell = [self.toDoListTableView cellForRowAtIndexPath:swipedRowIndex];
     
-    if (swipedCell.textLabel.textColor != [UIColor greenColor] && swipedCell.textLabel.textColor != [UIColor yellowColor] && swipedCell.textLabel.textColor != [UIColor redColor] && swipedCell.textLabel.textColor != [UIColor blackColor])
+    ToDoItemClass *swipedToDo = [self.toDoItemArray objectAtIndex:swipedRowIndex.row];
+    
+    NSInteger colorIndex = [swipedToDo.textColorArray indexOfObject:[swipedCell backgroundColor]];
+
+    colorIndex = colorIndex + 1;
+    
+    if (colorIndex == 3)
     {
-        swipedCell.textLabel.textColor = [UIColor greenColor];
+        colorIndex = 0;
     }
-    else if (swipedCell.textLabel.textColor == [UIColor greenColor])
-    {
-        swipedCell.textLabel.textColor = [UIColor yellowColor];
-    }
-    else if (swipedCell.textLabel.textColor == [UIColor yellowColor])
-    {
-        swipedCell.textLabel.textColor = [UIColor redColor];
-    }
-    else if (swipedCell.textLabel.textColor == [UIColor redColor])
-    {
-        swipedCell.textLabel.textColor = [UIColor blackColor];
-    }
-    else if (swipedCell.textLabel.textColor == [UIColor blackColor])
-    {
-        swipedCell.textLabel.textColor = [UIColor greenColor];
-    }
+    
+    swipedCell.backgroundColor = swipedToDo.textColorArray[colorIndex];
     
     
 }
