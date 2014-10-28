@@ -47,6 +47,7 @@
         cell.accessoryType = UITableViewCellAccessoryNone;
     }
 
+//    cell.textLabel.textColor = [UIColor blackColor];
 
 
     return cell;
@@ -77,6 +78,7 @@
 
     [self.toDoListTableView reloadData];
     
+    
     // if in Edit mode (edit button = DONE)
     
 
@@ -104,6 +106,7 @@
         [self.toDoListTableView reloadData];
         [self.toDoTextField resignFirstResponder];
         self.toDoTextField.text = @"";
+        
     }
 }
 
@@ -139,7 +142,7 @@
     
     UITableViewCell *swipedCell = [self.toDoListTableView cellForRowAtIndexPath:swipedRowIndex];
     
-    if (swipedCell.textLabel.textColor == [UIColor blackColor])
+    if (swipedCell.textLabel.textColor != [UIColor greenColor] && swipedCell.textLabel.textColor != [UIColor yellowColor] && swipedCell.textLabel.textColor != [UIColor redColor] && swipedCell.textLabel.textColor != [UIColor blackColor])
     {
         swipedCell.textLabel.textColor = [UIColor greenColor];
     }
@@ -151,9 +154,13 @@
     {
         swipedCell.textLabel.textColor = [UIColor redColor];
     }
-    else
+    else if (swipedCell.textLabel.textColor == [UIColor redColor])
     {
         swipedCell.textLabel.textColor = [UIColor blackColor];
+    }
+    else if (swipedCell.textLabel.textColor == [UIColor blackColor])
+    {
+        swipedCell.textLabel.textColor = [UIColor greenColor];
     }
     
     
