@@ -88,10 +88,6 @@
     [self.toDoListTableView reloadData];
 }
 
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return YES;
-}
 
 - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -133,16 +129,18 @@
 
     if ([gesture.titleLabel.text isEqualToString:@"Edit"])
     {
-        [gesture setTitle:@"Done" forState:UIControlStateNormal];
-        
-        [self.toDoListTableView setEditing: YES animated: YES];
+        if (!self.toDoItemArray.count == 0)
+        {
+            [gesture setTitle:@"Done" forState:UIControlStateNormal];
+            
+            [self.toDoListTableView setEditing: YES animated: YES];
+        }
     }
     else
     {
         [gesture setTitle:@"Edit" forState:UIControlStateNormal];
 
         [self.toDoListTableView setEditing: NO animated: YES];
-
     }
 
     [self.toDoListTableView reloadData];
