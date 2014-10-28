@@ -29,6 +29,18 @@
 
 #pragma mark - tableview delegates
 
+- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
+
+    return YES;
+}
+
+- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath
+{
+    NSString *stringToMove = [self.toDoItemArray objectAtIndex:sourceIndexPath.row];
+    [self.toDoItemArray removeObjectAtIndex:sourceIndexPath.row];
+    [self.toDoItemArray insertObject:stringToMove atIndex:destinationIndexPath.row];
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return self.toDoItemArray.count;
@@ -36,9 +48,19 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"toDoItemCell" forIndexPath:indexPath];
-
+    
+    cell.backgroundColor = [UIColor whiteColor];
     ToDoItemClass *toDoItem = self.toDoItemArray[indexPath.row];
+    cell.backgroundColor = toDoItem.color;
+    
+//    if (cell == nil) {
+//        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"toDoItemCell"] autorelease];
+//      cell.accessoryType = UITableViewCellAccessoryNone;
+//    cell.backgroundColor = [UIColor whiteColor];
+//    }
+
 
     cell.textLabel.text = toDoItem.text;
     if (toDoItem.isChecked) {
@@ -48,7 +70,6 @@
     {
         cell.accessoryType = UITableViewCellAccessoryNone;
     }
-
 
     return cell;
 }
@@ -81,11 +102,6 @@
     return YES;
 }
 
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return YES;
-}
-
 
 #pragma mark - IBActions
 
@@ -98,7 +114,7 @@
 
         toDoItem.text = self.toDoTextField.text;
         toDoItem.isChecked = NO;
-        toDoItem.textColorArray = @[[UIColor blackColor], [UIColor greenColor], [UIColor yellowColor], [UIColor redColor]];
+        toDoItem.color = [UIColor whiteColor];
         
         [self.toDoItemArray addObject:toDoItem];
 
@@ -137,22 +153,45 @@
     
     
     NSIndexPath *swipedRowIndex = [self.toDoListTableView indexPathForRowAtPoint:touchPoint];
-    
-    UITableViewCell *swipedCell = [self.toDoListTableView cellForRowAtIndexPath:swipedRowIndex];
-    
-    ToDoItemClass *swipedToDo = [self.toDoItemArray objectAtIndex:swipedRowIndex.row];
-    
-    NSInteger colorIndex = [swipedToDo.textColorArray indexOfObject:[swipedCell backgroundColor]];
 
-    colorIndex = colorIndex + 1;
+    UITableViewCell *swipedCell = [self.toDoListTableView cellForRowAtIndexPath:swipedRowIndex];
+
+    ToDoItemClass *swipedToDo = [self.toDoItemArray objectAtIndex:swipedRowIndex.row];
+//
+//    NSInteger colorIndex = [swipedToDo.textColorArray indexOfObject:[swipedCell backgroundColor]];
+//
+//    colorIndex = colorIndex + 1;
+//    
+//    if (colorIndex == 3)
+//    {
+//        colorIndex = 0;
+//    }
+//    
+//    swipedCell.backgroundColor = swipedToDo.textColorArray[colorIndex];
     
-    if (colorIndex == 3)
+    if (swipedCell.backgroundColor != [UIColor greenColor] && swipedCell.backgroundColor != [UIColor yellowColor] && swipedCell.backgroundColor != [UIColor redColor])
     {
-        colorIndex = 0;
+        swipedCell.backgroundColor = [UIColor greenColor];
+        swipedToDo.color =[UIColor greenColor];
     }
-    
-    swipedCell.backgroundColor = swipedToDo.textColorArray[colorIndex];
-    
+    else if (swipedCell.backgroundColor == [UIColor greenColor])
+    {
+        swipedCell.backgroundColor = [UIColor yellowColor];
+        swipedToDo.color =[UIColor yellowColor];
+
+    }
+    else if (swipedCell.backgroundColor == [UIColor yellowColor])
+    {
+        swipedCell.backgroundColor = [UIColor redColor];
+        swipedToDo.color =[UIColor redColor];
+
+    }
+    else if (swipedCell.backgroundColor == [UIColor redColor])
+    {
+        swipedCell.backgroundColor = [UIColor whiteColor];
+        swipedToDo.color =[UIColor whiteColor];
+
+    }
     
 }
 

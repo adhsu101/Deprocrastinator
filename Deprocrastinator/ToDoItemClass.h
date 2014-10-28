@@ -13,6 +13,6 @@
 
 @property NSString *text;
 @property BOOL isChecked;
-@property NSArray *textColorArray;
+@property UIColor *color;
 
 @end
