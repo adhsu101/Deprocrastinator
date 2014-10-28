@@ -76,10 +76,19 @@
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-
-    [self.toDoItemArray removeObjectAtIndex:indexPath.row];
-
-    [self.toDoListTableView reloadData];
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Are you sure?" message:nil preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *cancelButton = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+        [self dismissViewControllerAnimated:YES completion:nil];
+        [self.toDoListTableView reloadData];
+    }];
+    UIAlertAction *deleteButton = [UIAlertAction actionWithTitle:@"Delete" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        [self.toDoItemArray removeObjectAtIndex:indexPath.row];
+        [self.toDoListTableView reloadData];
+    }];
+    [alert addAction:cancelButton];
+    [alert addAction:deleteButton];
+    [self presentViewController:alert animated:YES completion:nil];
+    
 }
 
 
