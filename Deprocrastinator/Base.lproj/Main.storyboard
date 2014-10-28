@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -67,12 +67,16 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="Y6B-SJ-xxw" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="topMargin" constant="56" id="EkZ-ey-zGm"/>
                             <constraint firstItem="Y6B-SJ-xxw" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="-16" id="dR5-k2-3ba"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="Y6B-SJ-xxw" secondAttribute="bottom" id="fkc-H8-gUU"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Y6B-SJ-xxw" secondAttribute="trailing" constant="-16" id="ybD-uS-YkN"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="CIx-V3-W2V" appends="YES" id="0bk-il-Ecf"/>
+                        </connections>
                     </view>
                     <connections>
                         <outlet property="toDoListTableView" destination="Y6B-SJ-xxw" id="XlE-69-nNR"/>
@@ -80,6 +84,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
+                <swipeGestureRecognizer direction="right" id="CIx-V3-W2V">
+                    <connections>
+                        <action selector="onSwipeToPriority:" destination="vXZ-lx-hvc" id="eaO-Ku-PbM"/>
+                    </connections>
+                </swipeGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="272" y="290"/>
         </scene>

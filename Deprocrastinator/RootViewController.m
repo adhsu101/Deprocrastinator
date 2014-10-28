@@ -95,28 +95,31 @@
 
 #pragma mark - IBActions
 
-- (IBAction)onAddButtonPressed:(UIButton *)sender
+- (IBAction)onAddButtonPressed:(UIButton *)gesture
 {
-    [self.toDoList addObject:self.toDoTextField.text];
-    [self.checkmarks addObject:@NO];
-    [self.toDoListTableView reloadData];
-    [self.toDoTextField resignFirstResponder];
-    self.toDoTextField.text = @"";
+    if (![self.toDoTextField.text isEqualToString:@""])
+    {
+        [self.toDoList addObject:self.toDoTextField.text];
+        [self.checkmarks addObject:@NO];
+        [self.toDoListTableView reloadData];
+        [self.toDoTextField resignFirstResponder];
+        self.toDoTextField.text = @"";
+    }
 }
 
 
-- (IBAction)onEditButtonPressed:(UIButton *)sender
+- (IBAction)onEditButtonPressed:(UIButton *)gesture
 {
 
-    if ([sender.titleLabel.text isEqualToString:@"Edit"])
+    if ([gesture.titleLabel.text isEqualToString:@"Edit"])
     {
-        [sender setTitle:@"Done" forState:UIControlStateNormal];
+        [gesture setTitle:@"Done" forState:UIControlStateNormal];
 
         [self.toDoListTableView setEditing: YES animated: YES];
     }
     else
     {
-        [sender setTitle:@"Edit" forState:UIControlStateNormal];
+        [gesture setTitle:@"Edit" forState:UIControlStateNormal];
 
         [self.toDoListTableView setEditing: NO animated: YES];
 
@@ -126,5 +129,34 @@
 
 }
 
+- (IBAction)onSwipeToPriority:(UISwipeGestureRecognizer *)gesture
+{
+    CGPoint touchPoint = [gesture locationInView:self.toDoListTableView];
+    
+    
+    NSIndexPath *swipedRowIndex = [self.toDoListTableView indexPathForRowAtPoint:touchPoint];
+    NSLog(@"%li", (long)swipedRowIndex.row);
+    
+    UITableViewCell *swipedCell = [self.toDoListTableView cellForRowAtIndexPath:swipedRowIndex];
+    
+    if (swipedCell.textLabel.textColor == [UIColor blackColor])
+    {
+        swipedCell.textLabel.textColor = [UIColor greenColor];
+    }
+    else if (swipedCell.textLabel.textColor == [UIColor greenColor])
+    {
+        swipedCell.textLabel.textColor = [UIColor yellowColor];
+    }
+    else if (swipedCell.textLabel.textColor == [UIColor yellowColor])
+    {
+        swipedCell.textLabel.textColor = [UIColor redColor];
+    }
+    else
+    {
+        swipedCell.textLabel.textColor = [UIColor blackColor];
+    }
+    
+    
+}
 
 @end
