@@ -19,6 +19,7 @@
 
 @implementation RootViewController
 
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -29,18 +30,6 @@
 
 #pragma mark - tableview delegates
 
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-
-    return YES;
-}
-
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath
-{
-    NSString *stringToMove = [self.toDoItemArray objectAtIndex:sourceIndexPath.row];
-    [self.toDoItemArray removeObjectAtIndex:sourceIndexPath.row];
-    [self.toDoItemArray insertObject:stringToMove atIndex:destinationIndexPath.row];
-}
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return self.toDoItemArray.count;
@@ -50,26 +39,21 @@
 {
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"toDoItemCell" forIndexPath:indexPath];
-    
-    cell.backgroundColor = [UIColor whiteColor];
+
     ToDoItemClass *toDoItem = self.toDoItemArray[indexPath.row];
+
+    cell.backgroundColor = [UIColor whiteColor];
     cell.backgroundColor = toDoItem.color;
-    
-//    if (cell == nil) {
-//        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"toDoItemCell"] autorelease];
-//      cell.accessoryType = UITableViewCellAccessoryNone;
-//    cell.backgroundColor = [UIColor whiteColor];
-//    }
-
-
     cell.textLabel.text = toDoItem.text;
-    if (toDoItem.isChecked) {
+
+    if (toDoItem.isChecked)
+    {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
     }
     else
-    {
-        cell.accessoryType = UITableViewCellAccessoryNone;
-    }
+        {
+            cell.accessoryType = UITableViewCellAccessoryNone;
+        }
 
     return cell;
 }
@@ -77,16 +61,19 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Are you sure?" message:nil preferredStyle:UIAlertControllerStyleAlert];
+
     UIAlertAction *cancelButton = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
         [self dismissViewControllerAnimated:YES completion:nil];
-        [self.toDoListTableView reloadData];
     }];
+
     UIAlertAction *deleteButton = [UIAlertAction actionWithTitle:@"Delete" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         [self.toDoItemArray removeObjectAtIndex:indexPath.row];
-        [self.toDoListTableView reloadData];
+        [self.toDoListTableView reloadData]; 
     }];
+
     [alert addAction:cancelButton];
     [alert addAction:deleteButton];
+
     [self presentViewController:alert animated:YES completion:nil];
     
 }
@@ -99,16 +86,23 @@
     toDoItem.isChecked = !toDoItem.isChecked;
 
     [self.toDoListTableView reloadData];
-    
-    
-    // if in Edit mode (edit button = DONE)
-    
-
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return YES;
+}
+
+- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return YES;
+}
+
+- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath
+{
+    NSString *stringToMove = [self.toDoItemArray objectAtIndex:sourceIndexPath.row];
+    [self.toDoItemArray removeObjectAtIndex:sourceIndexPath.row];
+    [self.toDoItemArray insertObject:stringToMove atIndex:destinationIndexPath.row];
 }
 
 
@@ -130,7 +124,6 @@
         [self.toDoListTableView reloadData];
         [self.toDoTextField resignFirstResponder];
         self.toDoTextField.text = @"";
-        
     }
 }
 
@@ -141,7 +134,7 @@
     if ([gesture.titleLabel.text isEqualToString:@"Edit"])
     {
         [gesture setTitle:@"Done" forState:UIControlStateNormal];
-
+        
         [self.toDoListTableView setEditing: YES animated: YES];
     }
     else
@@ -160,48 +153,37 @@
 {
     CGPoint touchPoint = [gesture locationInView:self.toDoListTableView];
     
-    
     NSIndexPath *swipedRowIndex = [self.toDoListTableView indexPathForRowAtPoint:touchPoint];
 
     UITableViewCell *swipedCell = [self.toDoListTableView cellForRowAtIndexPath:swipedRowIndex];
 
     ToDoItemClass *swipedToDo = [self.toDoItemArray objectAtIndex:swipedRowIndex.row];
-//
-//    NSInteger colorIndex = [swipedToDo.textColorArray indexOfObject:[swipedCell backgroundColor]];
-//
-//    colorIndex = colorIndex + 1;
-//    
-//    if (colorIndex == 3)
-//    {
-//        colorIndex = 0;
-//    }
-//    
-//    swipedCell.backgroundColor = swipedToDo.textColorArray[colorIndex];
     
     if (swipedCell.backgroundColor != [UIColor greenColor] && swipedCell.backgroundColor != [UIColor yellowColor] && swipedCell.backgroundColor != [UIColor redColor])
     {
         swipedCell.backgroundColor = [UIColor greenColor];
         swipedToDo.color =[UIColor greenColor];
     }
-    else if (swipedCell.backgroundColor == [UIColor greenColor])
-    {
-        swipedCell.backgroundColor = [UIColor yellowColor];
-        swipedToDo.color =[UIColor yellowColor];
+    else
+        if (swipedCell.backgroundColor == [UIColor greenColor])
+        {
+            swipedCell.backgroundColor = [UIColor yellowColor];
+            swipedToDo.color =[UIColor yellowColor];
 
-    }
-    else if (swipedCell.backgroundColor == [UIColor yellowColor])
-    {
-        swipedCell.backgroundColor = [UIColor redColor];
-        swipedToDo.color =[UIColor redColor];
+        }
+    else
+        if (swipedCell.backgroundColor == [UIColor yellowColor])
+        {
+            swipedCell.backgroundColor = [UIColor redColor];
+            swipedToDo.color =[UIColor redColor];
 
-    }
-    else if (swipedCell.backgroundColor == [UIColor redColor])
-    {
-        swipedCell.backgroundColor = [UIColor whiteColor];
-        swipedToDo.color =[UIColor whiteColor];
-
-    }
-    
+        }
+    else
+        if (swipedCell.backgroundColor == [UIColor redColor])
+        {
+            swipedCell.backgroundColor = [UIColor whiteColor];
+            swipedToDo.color =[UIColor whiteColor];
+        }
 }
 
 @end
